@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wireframe — Page Routine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F8F4EF;
+    --warm-white: #FDFAF6;
+    --ink: #1A1714;
+    --muted: #7A7066;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --sage: #8BA888;
+    --terracotta: #C4714A;
+    --border: #E8E0D5;
+    --card-bg: #FFFFFF;
+    --shadow: 0 2px 20px rgba(26,23,20,0.08);
+    --shadow-lg: 0 8px 40px rgba(26,23,20,0.14);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #EDE8E0;
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 20px 100px;
+    min-height: 100vh;
+  }
+
+  /* Phone shell */
+  .phone {
+    width: 390px;
+    min-height: 844px;
+    background: var(--cream);
+    border-radius: 48px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.25), 0 0 0 10px #2A2520, inset 0 0 0 2px #3A342E;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Status bar */
+  .status-bar {
+    background: var(--cream);
+    padding: 14px 28px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .status-bar .notch {
+    width: 120px;
+    height: 32px;
+    background: #2A2520;
+    border-radius: 0 0 20px 20px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .status-icons { display: flex; gap: 6px; align-items: center; }
+
+  /* Nav bar */
+  .nav-bar {
+    background: var(--cream);
+    padding: 8px 20px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-back { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+  .nav-title { font-size: 13px; font-weight: 500; color: var(--muted); }
+  .nav-heart { font-size: 18px; }
+
+  /* Scrollable content */
+  .scroll-content {
+    overflow-y: auto;
+    max-height: 720px;
+    scroll-behavior: smooth;
+    background: var(--cream);
+  }
+  .scroll-content::-webkit-scrollbar { display: none; }
+
+  /* ─── ZONE 1 : HEADER ─── */
+  .zone1 {
+    background: var(--warm-white);
+    padding: 24px 20px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .badge-expert {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #F5F0E8, #EDE5D5);
+    border: 1px solid var(--gold-light);
+    border-radius: 30px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #8B6C2E;
+    letter-spacing: 0.03em;
+    margin-bottom: 14px;
+  }
+  .badge-expert .dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .routine-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .routine-subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .meta-pill {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .meta-pill .icon { font-size: 14px; }
+  .stars { color: #E8A020; font-size: 11px; letter-spacing: 1px; }
+  .rating-count { font-size: 10px; color: var(--muted); margin-left: 2px; }
+
+  /* ─── ZONE 2 : BUNDLE ─── */
+  .zone2 {
+    background: var(--ink);
+    padding: 20px;
+    margin: 0;
+  }
+
+  .bundle-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 6px;
+  }
+  .price-routine {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--warm-white);
+  }
+  .price-original {
+    font-size: 15px;
+    color: var(--muted);
+    text-decoration: line-through;
+  }
+  .saving-badge {
+    background: var(--terracotta);
+    color: white;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+  }
+
+  .price-sub {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  .cta-bundle {
+    width: 100%;
+    background: var(--gold);
+    color: var(--ink);
+    border: none;
+    border-radius: 14px;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+    transition: opacity 0.2s;
+  }
+  .cta-bundle:hover { opacity: 0.92; }
+  .cta-sub-text {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* ─── ZONE 3 : CŒUR ROUTINE ─── */
+  .zone3 {
+    padding: 24px 20px;
+    background: var(--cream);
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 18px;
+    line-height: 1.2;
+  }
+
+  /* Vertical step line */
+  .steps-container { position: relative; }
+  .steps-container::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--gold-light), transparent);
+  }
+
+  .product-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 16px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  .product-card:hover { box-shadow: var(--shadow-lg); }
+
+  .step-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .step-num {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: white;
+    font-size: 9px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    border: 1.5px solid var(--gold);
+    flex-shrink: 0;
+  }
+
+  .card-body {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .product-img {
+    width: 72px;
+    height: 90px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #F0EBE2, #E0D8CC);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, rgba(255,255,255,0.3), transparent);
+    border-radius: 12px;
+  }
+
+  .product-info { flex: 1; }
+  .product-brand {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .product-benefit {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+  .product-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+  .product-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .checkbox-add {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+  }
+  .checkbox-add .check-box {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border);
+    border-radius: 5px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+    flex-shrink: 0;
+  }
+  .checkbox-add.checked .check-box {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .btn-add-solo {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 7px 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-add-solo:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: white;
+  }
+
+  .essential-badge {
+    position: absolute;
+    top: -1px;
+    right: 14px;
+    background: var(--sage);
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 0 0 8px 8px;
+  }
+
+  /* ─── ZONE 4 : CROSS-SELL ─── */
+  .zone4 {
+    padding: 0 0 24px;
+    background: var(--cream);
+  }
+
+  .zone4-header {
+    padding: 0 20px 16px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  .section-divider {
+    height: 6px;
+    background: var(--border);
+    margin-bottom: 24px;
+  }
+
+  .see-all {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  .carousel {
+    display: flex;
+    gap: 12px;
+    padding: 0 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .carousel::-webkit-scrollbar { display: none; }
+
+  .carousel-card {
+    flex-shrink: 0;
+    width: 130px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+  .carousel-img {
+    width: 100%;
+    height: 80px;
+    border-radius: 10px;
+    background: linear-gradient(145deg, #EDE8E0, #DDD5C5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .carousel-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .carousel-price {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .btn-carousel-add {
+    width: 100%;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  /* ─── ZONE 5 : RÉASSURANCE ─── */
+  .zone5 {
+    padding: 0 20px 32px;
+    background: var(--cream);
+  }
+
+  .accordion {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+  }
+  .accordion-header {
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    justify-content: space-between;
+  }
+  .accordion-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .acc-icon { font-size: 16px; }
+  .acc-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .acc-chevron {
+    font-size: 12px;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .accordion.open .acc-chevron { transform: rotate(180deg); }
+  .accordion-body {
+    display: none;
+    padding: 0 18px 18px;
+  }
+  .accordion.open .accordion-body { display: block; }
+  .accordion-body p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .review-preview {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .review-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #E0D8CC, #CCC5B5);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .review-text { font-size: 11px; color: var(--muted); line-height: 1.5; }
+  .review-name { font-weight: 600; color: var(--ink); font-size: 11px; margin-bottom: 2px; }
+
+  /* ─── STICKY CTA ─── */
+  .sticky-cta {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(248, 244, 239, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 12px 20px 24px;
+    border-top: 1px solid var(--border);
+    z-index: 100;
+  }
+  .sticky-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .sticky-price {
+    flex-shrink: 0;
+  }
+  .sticky-price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .sticky-price-sub {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .sticky-btn {
+    flex: 1;
+    background: var(--ink);
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* Annotations (wireframe layer) */
+  .annot {
+    position: relative;
+  }
+  .annot-label {
+    display: inline-block;
+    background: #2A6EF5;
+    color: white;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  /* Zone label pills (outside phone) */
+  .zone-label-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .zone-pill {
+    background: rgba(42, 110, 245, 0.12);
+    border: 1px solid rgba(42, 110, 245, 0.3);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2A6EF5;
+  }
+
+  /* Interaction hint */
+  .hint {
+    background: rgba(201, 169, 110, 0.15);
+    border: 1px dashed var(--gold);
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+    color: #8B6C2E;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Legend outside -->
+<div style="position:fixed; top:20px; left:20px; background:white; border-radius:12px; padding:14px; font-size:11px; color:#555; box-shadow:0 4px 20px rgba(0,0,0,0.12); max-width:160px;">
+  <div style="font-weight:700; color:#1A1714; margin-bottom:10px; font-size:12px;">📐 Wireframe</div>
+  <div style="display:flex; flex-direction:column; gap:7px;">
+    <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px;height:8px;background:#2A6EF5;border-radius:2px;display:block;flex-shrink:0;"></span>Zone annotée</div>
+    <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px;height:8px;background:#C9A96E;border-radius:2px;display:block;flex-shrink:0;"></span>Micro-interaction</div>
+    <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px;height:8px;background:#8BA888;border-radius:2px;display:block;flex-shrink:0;"></span>Produit essentiel</div>
+    <div style="display:flex; align-items:center; gap:6px;"><span style="width:8px;height:8px;background:#C4714A;border-radius:2px;display:block;flex-shrink:0;"></span>Économie</div>
+  </div>
+  <div style="margin-top:12px; padding-top:10px; border-top:1px solid #eee; font-size:10px; color:#888;">Cliquez sur les<br>accordéons ↓</div>
+</div>
+
+<div class="phone">
+  <!-- Status bar -->
+  <div class="status-bar">
+    <div class="notch"></div>
+    <span style="z-index:1">9:41</span>
+    <div class="status-icons" style="z-index:1">
+      <span>●●●</span>
+      <span>WiFi</span>
+      <span>🔋</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav-bar">
+    <div class="nav-back">← Routines</div>
+    <div class="nav-title">Anti-Imperfections</div>
+    <div class="nav-heart">♡</div>
+  </div>
+
+  <!-- Scroll content -->
+  <div class="scroll-content">
+
+    <!-- ══ ZONE 1 ══ -->
+    <div class="zone1">
+      <span class="annot-label">Zone 1 — Header & Promesse</span>
+
+      <div class="badge-expert">
+        <span class="dot"></span>
+        ✦ Validé par nos dermatologues
+      </div>
+
+      <h1 class="routine-title">Routine<br>Anti-Imperfections</h1>
+      <p class="routine-subtitle">Peau nette & pores affinés en 4 semaines</p>
+
+      <div class="meta-row">
+        <div class="meta-pill">
+          <span class="icon">⏱</span>
+          3 min / jour
+        </div>
+        <div class="meta-pill">
+          <span class="stars">★★★★★</span>
+          <span style="font-weight:600; font-size:13px;">4.8</span>
+          <span class="rating-count">(312 avis)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ZONE 2 ══ -->
+    <div class="zone2">
+      <span class="annot-label" style="background:#4A9EF5;">Zone 2 — Bundle & Achat</span>
+
+      <div class="bundle-label">✦ Offre Routine Complète</div>
+
+      <div class="price-row">
+        <span class="price-routine">67€</span>
+        <span class="price-original">89€</span>
+        <span class="saving-badge">−25%</span>
+      </div>
+      <p class="price-sub">Les 3 produits essentiels · Livraison offerte</p>
+
+      <button class="cta-bundle">
+        🛒 Ajouter la routine complète (3 produits)
+      </button>
+      <p class="cta-sub-text">Paiement sécurisé · Retour 30j gratuit</p>
+    </div>
+
+    <!-- ══ ZONE 3 ══ -->
+    <div class="zone3">
+      <span class="annot-label">Zone 3 — Cœur de la Routine</span>
+      <div class="section-label">Vos étapes essentielles</div>
+      <h2 class="section-title">3 produits,<br>une synergie prouvée</h2>
+
+      <div class="steps-container">
+
+        <!-- Carte 1 -->
+        <div class="product-card">
+          <div class="essential-badge">Essentiel</div>
+          <div class="step-tag">
+            <span class="step-num">1</span>
+            ☀️ Matin &amp; 🌙 Soir · Étape 1
+          </div>
+          <div class="card-body">
+            <div class="product-img">🧴</div>
+            <div class="product-info">
+              <div class="product-brand">La Marque</div>
+              <div class="product-name">Gel Nettoyant Doux Purifiant</div>
+              <div class="product-benefit">Nettoie en profondeur sans agresser la barrière cutanée.</div>
+              <div class="product-price-row">
+                <span class="product-price">22€</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <label class="checkbox-add" onclick="this.classList.toggle('checked')">
+              <div class="check-box">✓</div>
+              <span>Sélectionner</span>
+            </label>
+            <button class="btn-add-solo">+ Ajouter seul</button>
+          </div>
+          <div class="hint">💡 Micro-interaction : tap pour sélectionner / désélectionner</div>
+        </div>
+
+        <!-- Carte 2 -->
+        <div class="product-card">
+          <div class="step-tag">
+            <span class="step-num">2</span>
+            🌙 Soir · Étape 2
+          </div>
+          <div class="card-body">
+            <div class="product-img">💧</div>
+            <div class="product-info">
+              <div class="product-brand">La Marque</div>
+              <div class="product-name">Sérum Acide Salicylique 2%</div>
+              <div class="product-benefit">Désobstrue les pores et réduit les imperfections visibles.</div>
+              <div class="product-price-row">
+                <span class="product-price">28€</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <label class="checkbox-add" onclick="this.classList.toggle('checked')">
+              <div class="check-box">✓</div>
+              <span>Sélectionner</span>
+            </label>
+            <button class="btn-add-solo">+ Ajouter seul</button>
+          </div>
+        </div>
+
+        <!-- Carte 3 -->
+        <div class="product-card">
+          <div class="step-tag">
+            <span class="step-num">3</span>
+            ☀️ Matin · Étape 3
+          </div>
+          <div class="card-body">
+            <div class="product-img">🌿</div>
+            <div class="product-info">
+              <div class="product-brand">La Marque</div>
+              <div class="product-name">Fluide Hydratant SPF 30</div>
+              <div class="product-benefit">Hydrate, matifie et protège sans effet gras ni occlusion.</div>
+              <div class="product-price-row">
+                <span class="product-price">17€</span>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <label class="checkbox-add" onclick="this.classList.toggle('checked')">
+              <div class="check-box">✓</div>
+              <span>Sélectionner</span>
+            </label>
+            <button class="btn-add-solo">+ Ajouter seul</button>
+          </div>
+        </div>
+
+      </div><!-- end steps-container -->
+    </div>
+
+    <!-- ══ ZONE 4 ══ -->
+    <div class="zone4">
+      <div class="section-divider"></div>
+      <span style="padding: 0 20px;" class="annot-label">Zone 4 — Cross-sell</span>
+      <div class="zone4-header">
+        <div>
+          <div class="section-label">Optionnel</div>
+          <h2 class="section-title" style="margin-bottom:0; font-size:18px;">Pour aller plus loin…</h2>
+        </div>
+        <span class="see-all">Voir tout</span>
+      </div>
+
+      <div class="carousel">
+        <div class="carousel-card">
+          <div class="carousel-img">🧪</div>
+          <div class="carousel-name">Masque Argile Kaolin</div>
+          <div class="carousel-price">19€</div>
+          <button class="btn-carousel-add">+ Ajouter</button>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-img">🪄</div>
+          <div class="carousel-name">Patch Anti-Points Noirs</div>
+          <div class="carousel-price">12€</div>
+          <button class="btn-carousel-add">+ Ajouter</button>
+        </div>
+        <div class="carousel-card">
+          <div class="carousel-img">💎</div>
+          <div class="carousel-name">Roll-on Contour Yeux</div>
+          <div class="carousel-price">24€</div>
+          <button class="btn-carousel-add">+ Ajouter</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ ZONE 5 ══ -->
+    <div class="zone5">
+      <span class="annot-label">Zone 5 — Réassurance & Contenu Expert</span>
+      <div class="section-label" style="margin-bottom:14px;">Contenus associés</div>
+
+      <div class="accordion" id="acc1">
+        <div class="accordion-header" onclick="toggleAcc('acc1')">
+          <div class="accordion-left">
+            <span class="acc-icon">📝</span>
+            <span class="acc-title">Comment bien appliquer cette routine ?</span>
+          </div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong style="color:#1A1714;">Matin :</strong> Nettoyant → Fluide SPF 30<br>
+          Appliquer le nettoyant sur peau mouillée, masser 30 secondes, rincer. Finir par le fluide en tapotant sur le visage.<br><br>
+          <strong style="color:#1A1714;">Soir :</strong> Nettoyant → Sérum BHA<br>
+          Sécher la peau 10 min avant d'appliquer le sérum pour maximiser la pénétration.</p>
+        </div>
+      </div>
+
+      <div class="accordion" id="acc2">
+        <div class="accordion-header" onclick="toggleAcc('acc2')">
+          <div class="accordion-left">
+            <span class="acc-icon">💬</span>
+            <span class="acc-title">FAQ & conseils d'experts</span>
+          </div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <p><strong style="color:#1A1714;">Peut-on utiliser la routine en cas de peau sensible ?</strong><br>
+          Oui, démarrez à raison de 2x/semaine pour le sérum BHA, puis augmentez progressivement selon la tolérance de votre peau.<br><br>
+          <strong style="color:#1A1714;">Quand voir les premiers résultats ?</strong><br>
+          Les résultats sont visibles dès 2 semaines, optimaux à 4 semaines d'utilisation régulière.</p>
+        </div>
+      </div>
+
+      <div class="accordion" id="acc3">
+        <div class="accordion-header" onclick="toggleAcc('acc3')">
+          <div class="accordion-left">
+            <span class="acc-icon">⭐</span>
+            <span class="acc-title">Avis clients & Avant / Après</span>
+          </div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="accordion-body">
+          <div class="review-preview">
+            <div class="review-avatar">🙍‍♀️</div>
+            <div>
+              <div class="review-name">Camille R. <span style="color:#E8A020; font-size:10px;">★★★★★</span></div>
+              <div class="review-text">"Ma peau n'a jamais été aussi nette en 4 semaines. Les pores sont vraiment affinés, je recommande sans hésiter."</div>
+            </div>
+          </div>
+          <div class="review-preview" style="margin-top:10px;">
+            <div class="review-avatar" style="background:linear-gradient(135deg,#D5E8D5,#B5CEB5);">🙋‍♀️</div>
+            <div>
+              <div class="review-name">Sarah M. <span style="color:#E8A020; font-size:10px;">★★★★★</span></div>
+              <div class="review-text">"Avant/après bluffant. J'ai réduit mes imperfections de 80% sans dessécher ma peau sensitive."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- Spacer for sticky CTA -->
+    <div style="height: 80px;"></div>
+
+  </div><!-- end scroll-content -->
+
+  <!-- ── STICKY CTA ── -->
+  <div class="sticky-cta">
+    <div class="sticky-inner">
+      <div class="sticky-price">
+        <div class="sticky-price-main">67€</div>
+        <div class="sticky-price-sub">3 produits</div>
+      </div>
+      <button class="sticky-btn">
+        🛒 Ajouter la routine
+      </button>
+    </div>
+  </div>
+
+</div><!-- end phone -->
+
+<script>
+function toggleAcc(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('open');
+}
+
+// Checkbox pick & choose interaction
+document.querySelectorAll('.checkbox-add').forEach(el => {
+  el.addEventListener('click', function() {
+    const box = this.querySelector('.check-box');
+    const isChecked = this.classList.contains('checked');
+    if (isChecked) {
+      box.textContent = '';
+    } else {
+      box.textContent = '✓';
+    }
+  });
+});
+
+// Button hover effect
+document.querySelectorAll('.btn-add-solo').forEach(btn => {
+  btn.addEventListener('click', function() {
+    this.textContent = '✓ Ajouté';
+    this.style.background = '#1A1714';
+    this.style.color = 'white';
+    this.style.borderColor = '#1A1714';
+    setTimeout(() => {
+      this.textContent = '+ Ajouter seul';
+      this.style.background = '';
+      this.style.color = '';
+      this.style.borderColor = '';
+    }, 1500);
+  });
+});
+</script>
+</body>
+</html>
